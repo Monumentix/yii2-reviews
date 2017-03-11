@@ -1,0 +1,21 @@
+{
+    "name": "monumentix/yii2-reviews",
+    "description": "Test Description",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"],
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Monumentix",
+            "email": "brian@monumentixwebdesign.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "monumentix\\reviews\\": ""
+        }
+    }
+}
