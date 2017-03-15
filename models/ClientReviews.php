@@ -15,7 +15,7 @@ class ClientReviews extends ActiveRecord {
   public function rules(){
     return[
       [['fullname','location','quote'],'required'],
-      [['created_at','updated_at','is_deleted'],'integer'],
+      [['created_at','updated_at','is_deleted','is_featured'],'integer'],
       [['fullname','location','quote'],'string','max'=>255]
     ];
   }
@@ -44,17 +44,10 @@ class ClientReviews extends ActiveRecord {
   }
 
 
-  public function attributeLables(){
+  public function attributeLabels(){
       return[
         'id'=>'Id',
-        /*
-        'fullname' => 'Fullname',
-        'location' => 'Location',
-        'quote' => 'Quote',
-        'created_at' => 'Created At',
-        'updated_at' => 'Updated At',
-        'is_deleted' => 'Is Deleted',
-        */
+        'is_featured'=>'Featured'
       ];
   }//end lables
 

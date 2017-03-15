@@ -1,59 +1,57 @@
 <?php
 namespace monumentix\reviews;
 
+use monumentix\reviews\models\ClientReviewsSearch;
+use monumentix\reviews\assets\ReviewsSliderAsset;
+
 use yii;
+use yii\base\Widget;
+use yii\helpers\Html;
+use yii\helpers\Json;
+
 use yii\base\InvalidCallException;
 
-class ReviewSliderWidget extends \yii\base\Widget{
+class ReviewSliderWidget extends Widget{
 
-  public $dataProvider  ; //the dataprovider used by the wideget
-  public $options  ; //options array we can use later
+  public $viewFile ;
+  public $options  ; //widget HTML container options
+  public $pluginOptions = [] ; // our owl plugin options
 
   public function init(){
-    parent::init();
+    //assign unigue id if not passed in
+    if(!isset($this->options['id'])){
+      $this->options['id'] = $this->getId();
+    }
+    //start the widget
+    echo Html::beginTag('div',$this->options);
   }
 
   public function run(){
-    $init = $this->initOptions();
-
-    if($init === true ) {
-      //All checks passed
-      return $this->render('reviewSlider/reviewSlider.php');
+    if(isset($this->viewFile)){
+      //render the passed in view object instead
+      echo $this->render($this->viewFile, [
+        'dataProvider' => ClientReviewsSearch::getFeaturedReviews(),
+      ]);
     }else{
-      //Checks Failed
-      return $this->render('reviewSlider/error.php',[
-        'init'=>$init,
-        ]);
+      echo $this->render('reviewSlider/reviewSlider.php', [
+        'dataProvider' => ClientReviewsSearch::getFeaturedReviews(),
+      ]);
     }
+
+    echo Html::endTag('div');
+    $this->registerClientScript();
   }
 
+  private function registerClientScript(){
+    //get view and assign assets
+    $view=$this->getView();
+    ReviewsSliderAsset::register($view);
 
-
-  /*
-  * initOptions - handles loading and checking of variables for needed data
-  *   before attempting to load/render slides
-  *
-  *   return True on success and Array of errors on false
-  */
-  public function initOptions(){
-    $results = false;
-
-    //check for dataProvider
-    if(!isset($this->dataProvider)){
-        $results[] = ['error'=>'No Data Provider Set'];
-    }
-
-    if(!isset($this->someThing)){
-        $results[] = ['error'=>'No thing set Provider Set'];
-    }
-
-    //See if we ever set an error message and return the error or else just return "True"
-    if($results == false){
-      return true;
-    }else
-      return $results;
-  }//end initOptions
-
+    //register carousel js with view
+    $id=$this->options['id'];
+    $options = Json::encode($this->pluginOptions);
+    $view->registerJs("jQuery('#".$id."').owlCarousel($options)");
+  }
 
 }//end class
 ?>

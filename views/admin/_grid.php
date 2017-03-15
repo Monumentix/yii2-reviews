@@ -17,14 +17,14 @@ use kartik\grid\GridView;
         'class'=>'kartik\grid\DataColumn',
         'hAlign'=>'left',
         'vAlign'=>'middle',
-        'width'=>'25%',
+        'width'=>'20%',
         'attribute'=>'fullname',
       ],
       [
         'class'=>'kartik\grid\DataColumn',
         'hAlign'=>'left',
         'vAlign'=>'middle',
-        'width'=>'25%',
+        'width'=>'20%',
         'attribute'=>'location',
       ],
       [
@@ -34,7 +34,20 @@ use kartik\grid\GridView;
         'width'=>'40%',
         'attribute'=>'quote',
       ],
-
+      [
+        'class'=>'kartik\grid\DataColumn',
+        'hAlign'=>'center',
+        'vAlign'=>'middle',
+        'width'=>'5%',
+        'label'=>'Featured',
+        'encodeLabel'=>false,
+        'mergeHeader'=>true,
+        'attribute'=>'is_featured',
+        'format'=>'html',
+        'value'=>function($model){
+          return (($model->is_featured == true) ? Icon::show('star') : '' );
+        }
+      ],
       [
         'class'=>'kartik\grid\ActionColumn',
         'hAlign'=>'center',

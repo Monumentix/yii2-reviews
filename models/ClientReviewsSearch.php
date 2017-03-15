@@ -43,10 +43,23 @@ class ClientReviewsSearch extends ClientReviews {
           ->andFilterWhere(['like', 'quote', $this->quote]);
 
     return $dataProvider;
-
-
   }//end search
 
+
+  /*-- gets featured reviews for slider -*/
+  public function getFeaturedReviews(){
+    $query  = ClientReviews::find()->where(['is_featured'=>true])->all();
+
+    return $query;
+  }
+
+
+
+  public function getClientReviews($limit = 5, $asArray = false){
+    $query  = ClientReviews::find()->where(['is_featured'=>true])->asArray()->all();
+
+    return $query;
+  }
 
 }//end class
 

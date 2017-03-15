@@ -10,10 +10,12 @@
             "email": "brian@monumentixwebdesign.com"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "yiisoft/yii2": "*",
         "kartik-v/yii2-icons": "@dev",
-        "kartik-v/yii2-grid": "@dev"
+        "kartik-v/yii2-grid": "@dev",
+        "bower-asset/owl.carousel":"*"
     },
     "autoload": {
         "psr-4": {

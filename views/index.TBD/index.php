@@ -5,12 +5,10 @@ use kartik\icons\Icon;
 
 <div class="container text-center margin-t-sm">
 <h3 class="text-center">
-      A place holder controller/view for development
+      Client Reviews
   </h3>
 </div>
-
 <hr class="thin">
-
 <?=ReviewSliderWidget::widget([
     'viewFile'=> '@app/themes/protech/views/reviews/reviewSlider.php',
     'pluginOptions'=>
