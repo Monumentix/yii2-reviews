@@ -48,7 +48,9 @@ class ClientReviewsSearch extends ClientReviews {
 
   /*-- gets featured reviews for slider -*/
   public function getFeaturedReviews(){
-    $query  = ClientReviews::find()->where(['is_featured'=>true])->all();
+    $query  = ClientReviews::find()->where(['is_featured'=>true])
+      ->andFilterWhere(['is_deleted'=>false])
+      ->all();
 
     return $query;
   }

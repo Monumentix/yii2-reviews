@@ -14,9 +14,10 @@ class ClientReviews extends ActiveRecord {
 
   public function rules(){
     return[
-      [['fullname','location','quote'],'required'],
+      [['fullname','quote'],'required'],
       [['created_at','updated_at','is_deleted','is_featured'],'integer'],
-      [['fullname','location','quote'],'string','max'=>255]
+      [['quote'],'string'],
+      [['fullname','location'],'string','max'=>255]
     ];
   }
 
@@ -40,7 +41,7 @@ class ClientReviews extends ActiveRecord {
 
   /*filters not deleted records from active queries as a default scope*/
   public static function find(){
-    return parent::find()->andWhere(['is_deleted'=>false]);
+    return parent::find()->where(['is_deleted'=>false]);
   }
 
 
